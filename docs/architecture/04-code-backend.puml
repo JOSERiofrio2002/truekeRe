@@ -1,0 +1,289 @@
+@startuml Truekealo_Code_Backend
+!theme plain
+title Diagrama de Clases (C4 Level 4) - Backend FastAPI
+
+'Configuración de estilos
+skinparam {
+    ClassBackgroundColor #E3F2FD
+    ClassBorderColor #1976D2
+    ArrowColor #333333
+}
+
+'========== MODELOS (ORM) ==========
+package "app.models" {
+    class User {
+        +id: int {PK}
+        +email: str {unique}
+        +nombre_completo: str
+        +hashed_password: str
+        +telefono: str
+        +ubicacion: str
+        +avatar_url: str
+        +is_active: bool
+        +is_verified: bool
+        +created_at: datetime
+        +updated_at: datetime
+        --
+        +articulos: List[Articulo]
+        +propuestas_enviadas: List[Propuesta]
+        +propuestas_recibidas: List[Propuesta]
+    }
+    
+    class Articulo {
+        +id: int {PK}
+        +titulo: str
+        +descripcion: str
+        +categoria: CategoriaArticulo
+        +estado_articulo: EstadoArticulo
+        +valor_estimado: float
+        +imagen_url: str
+        +condicion: str
+        +propietario_id: int {FK}
+        +created_at: datetime
+        +updated_at: datetime
+        --
+        +propietario: User
+        +propuestas_como_oferta: List[Propuesta]
+        +propuestas_como_solicitud: List[Propuesta]
+    }
+    
+    class Propuesta {
+        +id: int {PK}
+        +usuario_ofertante_id: int {FK}
+        +usuario_receptor_id: int {FK}
+        +articulo_ofrecido_id: int {FK}
+        +articulo_solicitado_id: int {FK}
+        +mensaje: str
+        +estado: EstadoPropuesta
+        +created_at: datetime
+        +updated_at: datetime
+        --
+        +usuario_ofertante: User
+        +usuario_receptor: User
+        +articulo_ofrecido: Articulo
+        +articulo_solicitado: Articulo
+    }
+    
+    class Mensaje {
+        +id: int {PK}
+        +remitente_id: int {FK}
+        +destinatario_id: int {FK}
+        +contenido: str
+        +leido: bool
+        +created_at: datetime
+        --
+        +remitente: User
+        +destinatario: User
+    }
+    
+    enum EstadoArticulo {
+        DISPONIBLE
+        EN_NEGOCIACION
+        INTERCAMBIADO
+        NO_DISPONIBLE
+    }
+    
+    enum EstadoPropuesta {
+        PENDIENTE
+        ACEPTADA
+        RECHAZADA
+        CANCELADA
+        COMPLETADA
+    }
+    
+    enum CategoriaArticulo {
+        ELECTRONICA
+        ROPA
+        LIBROS
+        DEPORTES
+        HOGAR
+        JUGUETES
+        OTROS
+    }
+}
+
+'========== SCHEMAS (Pydantic) ==========
+package "app.schemas" {
+    class UserCreate {
+        +email: EmailStr
+        +nombre_completo: str
+        +password: str
+        +telefono: str
+        +ubicacion: str
+        --
+        +validate_password()
+    }
+    
+    class UserResponse {
+        +id: int
+        +email: str
+        +nombre_completo: str
+        +is_active: bool
+        +created_at: datetime
+    }
+    
+    class Token {
+        +access_token: str
+        +token_type: str
+        +user: UserResponse
+    }
+    
+    class ArticuloCreate {
+        +titulo: str
+        +descripcion: str
+        +categoria: CategoriaArticulo
+        +valor_estimado: float
+        +condicion: str
+        +imagen_url: str
+    }
+    
+    class ArticuloResponse {
+        +id: int
+        +titulo: str
+        +estado_articulo: EstadoArticulo
+        +propietario_id: int
+        +created_at: datetime
+    }
+    
+    class PropuestaCreate {
+        +articulo_ofrecido_id: int
+        +articulo_solicitado_id: int
+        +mensaje: str
+    }
+    
+    class PropuestaResponse {
+        +id: int
+        +estado: EstadoPropuesta
+        +usuario_ofertante_id: int
+        +usuario_receptor_id: int
+        +created_at: datetime
+    }
+}
+
+'========== ROUTERS (API Endpoints) ==========
+package "app.routers" {
+    class AuthRouter {
+        +register(user_data: UserCreate): UserResponse
+        +login(credentials: UserLogin): Token
+        +get_current_user_info(): UserResponse
+    }
+    
+    class ArticulosRouter {
+        +create_articulo(data: ArticuloCreate): ArticuloResponse
+        +get_articulos(filters): List[ArticuloResponse]
+        +get_articulo(id: int): ArticuloResponse
+        +update_articulo(id: int, data): ArticuloResponse
+        +delete_articulo(id: int): void
+        +get_mis_articulos(): List[ArticuloResponse]
+    }
+    
+    class PropuestasRouter {
+        +create_propuesta(data: PropuestaCreate): PropuestaResponse
+        +get_propuestas_recibidas(): List[PropuestaResponse]
+        +get_propuestas_enviadas(): List[PropuestaResponse]
+        +get_propuesta(id: int): PropuestaResponse
+        +update_propuesta_estado(id: int, estado): PropuestaResponse
+    }
+}
+
+'========== CORE (Seguridad y Configuración) ==========
+package "app.core" {
+    class Security {
+        +{static} verify_password(plain, hashed): bool
+        +{static} get_password_hash(password): str
+        +{static} create_access_token(data): str
+        +{static} decode_access_token(token): dict
+        +{static} get_current_user(token, db): User
+    }
+    
+    class Config {
+        +DB_HOST: str
+        +DB_PORT: int
+        +DB_USER: str
+        +DB_PASSWORD: str
+        +DB_NAME: str
+        +SECRET_KEY: str
+        +ALGORITHM: str
+        +ACCESS_TOKEN_EXPIRE_MINUTES: int
+        --
+        +DATABASE_URL: str
+    }
+}
+
+'========== DATABASE ==========
+package "app.database" {
+    class Database {
+        +engine: Engine
+        +SessionLocal: sessionmaker
+        +Base: declarative_base
+        --
+        +get_db(): Generator
+        +init_db(): void
+    }
+}
+
+'========== RELACIONES ==========
+
+'Relaciones de Modelos
+User "1" -- "*" Articulo : posee >
+User "1" -- "*" Propuesta : oferta >
+User "1" -- "*" Propuesta : recibe >
+User "1" -- "*" Mensaje : envía >
+User "1" -- "*" Mensaje : recibe >
+Articulo "*" -- "*" Propuesta : participa en >
+Articulo -- EstadoArticulo : tiene >
+Articulo -- CategoriaArticulo : pertenece a >
+Propuesta -- EstadoPropuesta : tiene >
+
+'Relaciones Routers-Schemas
+AuthRouter ..> UserCreate : usa
+AuthRouter ..> UserResponse : retorna
+AuthRouter ..> Token : retorna
+ArticulosRouter ..> ArticuloCreate : usa
+ArticulosRouter ..> ArticuloResponse : retorna
+PropuestasRouter ..> PropuestaCreate : usa
+PropuestasRouter ..> PropuestaResponse : retorna
+
+'Relaciones Routers-Modelos
+AuthRouter --> User : consulta
+ArticulosRouter --> Articulo : CRUD
+PropuestasRouter --> Propuesta : CRUD
+
+'Relaciones Core
+AuthRouter --> Security : autentica con
+Security --> Config : usa
+Database --> Config : usa
+
+'Relaciones Base de Datos
+User --|> Database : persiste en
+Articulo --|> Database : persiste en
+Propuesta --|> Database : persiste en
+Mensaje --|> Database : persiste en
+
+'Notas explicativas
+note right of User
+    Modelo principal de usuario
+    con relaciones a todos
+    los recursos del sistema
+end note
+
+note right of Security
+    Gestiona autenticación JWT
+    y hashing de contraseñas
+    usando bcrypt y python-jose
+end note
+
+note right of Database
+    Configuración de SQLAlchemy
+    para conexión a MariaDB
+    con pool de conexiones
+end note
+
+note bottom of AuthRouter
+    Endpoints de autenticación:
+    POST /auth/register
+    POST /auth/login
+    GET /auth/me
+end note
+
+@enduml

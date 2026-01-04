@@ -1,0 +1,125 @@
+@startuml Truekealo_Container_Diagram
+!theme plain
+title Diagrama de Contenedores (C4 Level 2) - Sistema Truekealo
+
+'Definición de estilos
+skinparam {
+    BackgroundColor white
+    ArrowColor #333333
+    RectangleBorderColor #333333
+    ComponentBackgroundColor #85C1E9
+    DatabaseBackgroundColor #F8B739
+    QueueBackgroundColor #B8E986
+}
+
+'Actores
+actor "Usuario" as Usuario #08427B
+
+'Contenedores Frontend
+package "Aplicación Web Frontend" #85C1E9 {
+    component "HTML5/CSS3\nJavaScript" as Frontend {
+        [Login/Registro]
+        [Dashboard]
+        [Explorar Artículos]
+        [Mis Artículos]
+        [Propuestas]
+        [Perfil]
+    }
+}
+
+'Contenedores Backend
+package "API Backend - FastAPI" #85C1E9 {
+    component "Routers\n(Endpoints)" as Routers {
+        [Auth Router]
+        [Artículos Router]
+        [Propuestas Router]
+    }
+    
+    component "Core\n(Lógica Central)" as Core {
+        [Security/JWT]
+        [Configuración]
+    }
+    
+    component "Models\n(ORM SQLAlchemy)" as Models {
+        [User Model]
+        [Artículo Model]
+        [Propuesta Model]
+    }
+    
+    component "Schemas\n(Pydantic)" as Schemas {
+        [Validación Datos]
+    }
+}
+
+'Base de Datos
+database "MariaDB\n10.x" as DB #F8B739 {
+    [Tabla: users]
+    [Tabla: articulos]
+    [Tabla: propuestas]
+    [Tabla: mensajes]
+}
+
+'Relaciones Usuario-Frontend
+Usuario --> Frontend : Accede vía\nnavegador web\n(HTTPS)
+
+'Relaciones Frontend-Backend
+Frontend --> Routers : Peticiones HTTP\nAPI REST\n(JSON)
+note on link
+    GET /api/v1/articulos
+    POST /api/v1/auth/login
+    PUT /api/v1/articulos/{id}
+end note
+
+'Relaciones internas del Backend
+Routers --> Core : Utiliza
+Routers --> Schemas : Valida con
+Routers --> Models : Consulta
+Core --> Models : Gestiona
+
+'Relaciones Backend-DB
+Models --> DB : Lee/Escribe\n(SQLAlchemy ORM)
+
+'Notas explicativas
+note right of Frontend
+    **Tecnologías:**
+    - HTML5, CSS3 (Tailwind)
+    - JavaScript ES6+
+    - Fetch API para HTTP
+    
+    **Funcionalidades:**
+    - SPA (Single Page App)
+    - Diseño responsive
+    - Dark mode
+    - Accesibilidad WCAG
+end note
+
+note right of Routers
+    **Características:**
+    - RESTful API
+    - Autenticación JWT
+    - CORS habilitado
+    - Validación automática
+    - Documentación OpenAPI
+    
+    **Endpoints principales:**
+    /auth/register
+    /auth/login
+    /articulos/
+    /propuestas/
+end note
+
+note bottom of DB
+    **Características:**
+    - Motor: InnoDB
+    - Charset: utf8mb4
+    - Relaciones con FK
+    - Índices optimizados
+    
+    **Datos almacenados:**
+    - Usuarios y autenticación
+    - Artículos publicados
+    - Propuestas de intercambio
+    - Historial de mensajes
+end note
+
+@enduml
