@@ -1,24 +1,23 @@
 # 🔄 Truekealo - Sistema de Intercambio de Artículos
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI 0.109.0](https://img.shields.io/badge/fastapi-0.109.0-green.svg)](https://fastapi.tiangolo.com/)
 [![MariaDB 10.x](https://img.shields.io/badge/mariadb-10.x-orange.svg)](https://mariadb.org/)
 
-## 📋 Descripción
+##  Descripción
 
 Truekealo es una plataforma web de **intercambio colaborativo de artículos** entre usuarios. Permite que personas publiquen artículos que no usan, busquen artículos de otros usuarios y realicen propuestas de intercambio sin intervención de dinero.
 
 ### Características Principales
 
-- 🔐 **Autenticación Segura** con JWT y contraseñas hasheadas (bcrypt)
-- 📱 **Interfaz Responsive** con diseño mobile-first y soporte dark mode
-- 🛍️ **Sistema de Artículos** con CRUD completo, búsqueda y filtros
-- 💬 **Propuestas de Intercambio** entre usuarios
-- 👤 **Perfiles de Usuario** con información personal y historial
-- 📡 **API REST** documentada con Swagger/OpenAPI
-- ♿ **Accesibilidad** WCAG 2.1 (AA)
-- 📊 **Arquitectura Escalable** con separación de capas
+-  **Autenticación Segura** con JWT y contraseñas hasheadas (bcrypt)
+-  **Interfaz Responsive** con diseño mobile-first y soporte dark mode
+-  **Sistema de Artículos** con CRUD completo, búsqueda y filtros
+-  **Propuestas de Intercambio** entre usuarios
+-  **Perfiles de Usuario** con información personal y historial
+-  **API REST** documentada con Swagger/OpenAPI
+-  **Accesibilidad** WCAG 2.1 (AA)
+-  **Arquitectura Escalable** con separación de capas
 
 ### Frontend
 - **HTML5** - Markup semántico
@@ -35,7 +34,7 @@ Truekealo es una plataforma web de **intercambio colaborativo de artículos** en
 ### Base de Datos
 - **MariaDB ** - Base de datos relacional
 
-## 📚 Documentación Completa
+##  Documentación Completa
 
 **[👉 ACCEDE AL ÍNDICE DE DOCUMENTACIÓN](docs/INDICE.md)** ← Punto de entrada principal
 
@@ -54,7 +53,7 @@ Truekealo es una plataforma web de **intercambio colaborativo de artículos** en
 
 ---
 
-## 🚀 Inicio Rápido
+##  Inicio Rápido
 
 ### Requisitos
 - Python 3.9+
@@ -82,22 +81,19 @@ python -m http.server 5500
 
 **Para instalación completa con BD:** Ver [docs/INSTALACION.md](docs/INSTALACION.md)
 
-## 📚 Rutas de Aprendizaje
+##  Rutas de Aprendizaje
 
-### ⚡ Rápida (30 min)
+###  Rápida (30 min)
 1. [README.md](README.md) - Este archivo
 2. [RESUMEN_VISUAL.md](docs/RESUMEN_VISUAL.md) - Visualizar arquitectura
 3. [INSTALACION.md](docs/INSTALACION.md) - Setup rápido
 
-### 🎯 Completa (2 horas)
-Seguir orden en [INDICE.md](docs/INDICE.md)
-
-### 👨‍💻 Desarrollo
+###  Desarrollo
 1. [INSTALACION.md](docs/INSTALACION.md) - Setup completo
 2. [DOCUMENTACION_TECNICA.md](docs/DOCUMENTACION_TECNICA.md) - Entender API
-3. [GITFLOW_GUIDE.md](docs/GITFLOW_GUIDE.md) - Workflow
 
-## 📡 Endpoints Principales
+
+##  Endpoints Principales
 
 ```
 POST   /api/v1/auth/register        # Registro
@@ -113,7 +109,7 @@ PATCH  /api/v1/propuestas/{id}      # Aceptar/rechazar
 
 ---
 
-## 🔐 Seguridad
+##  Seguridad
 
 ✅ JWT Authentication (30 min expiration)  
 ✅ Bcrypt password hashing (work factor 12)  
@@ -128,39 +124,22 @@ PATCH  /api/v1/propuestas/{id}      # Aceptar/rechazar
 ## 📖 Información por Rol
 
 ### Para Estudiantes/Evaluadores
-- 📊 [RESUMEN_VISUAL.md](docs/RESUMEN_VISUAL.md) - Diagrama completo del sistema
-- 📈 [RESUMEN_EJECUTIVO.md](docs/RESUMEN_EJECUTIVO.md) - Resumen y checklist
-- ✅ [CHECKLIST_VERIFICACION.md](docs/CHECKLIST_VERIFICACION.md) - Qué fue completado
+-  [RESUMEN_VISUAL.md](docs/RESUMEN_VISUAL.md) - Diagrama completo del sistema
+-  [RESUMEN_EJECUTIVO.md](docs/RESUMEN_EJECUTIVO.md) - Resumen y checklist
+-  [CHECKLIST_VERIFICACION.md](docs/CHECKLIST_VERIFICACION.md) - Qué fue completado
 
 ### Para Desarrolladores
-- 🏗️ [DOCUMENTACION_TECNICA.md](docs/DOCUMENTACION_TECNICA.md) - API y arquitectura
-- 🔀 [GITFLOW_GUIDE.md](docs/GITFLOW_GUIDE.md) - Control de versiones
-- 📡 [Swagger UI](http://localhost:8000/api/docs) - API interactiva
+-  [DOCUMENTACION_TECNICA.md](docs/DOCUMENTACION_TECNICA.md) - API y arquitectura
+-  [Swagger UI](http://localhost:8000/api/docs) - API interactiva
 
 ### Para DevOps/Operadores
-- 🚀 [INSTALACION.md](docs/INSTALACION.md) - Setup y deployment
-- 🔧 [Backend README](Truekealo/backend/README.md) - Servidor
-- 🗄️ Instrucciones BD en INSTALACION.md (2500+ líneas)
+-  [INSTALACION.md](docs/INSTALACION.md) - Setup y deployment
+-  [Backend README](Truekealo/backend/README.md) - Servidor
+-  Instrucciones BD en INSTALACION.md (2500+ líneas)
 
 ---
 
-## 📝 Licencia
-
-MIT License - Ver [LICENSE](LICENSE)
-
----
-
-## 🤝 Contribuciones
-
-1. Leer [GITFLOW_GUIDE.md](docs/GITFLOW_GUIDE.md)
-2. Fork el proyecto
-3. Crear rama `feature/tu-feature` desde `develop`
-4. Commits con formato: `feat(scope): descripción`
-5. Pull request a `develop`
-
----
-
-## 📊 Estadísticas del Proyecto
+##  Estadísticas del Proyecto
 
 ```
 Backend:         1500+ líneas Python (15 archivos)
@@ -177,7 +156,7 @@ Ver [CHECKLIST_VERIFICACION.md](docs/CHECKLIST_VERIFICACION.md) para detalle com
 
 ---
 
-## 💡 Tips Útiles
+##  Tips Útiles
 
 **Primer inicio:**
 ```bash
@@ -201,29 +180,16 @@ Ver [DOCUMENTACION_TECNICA.md#troubleshooting](docs/DOCUMENTACION_TECNICA.md)
 
 ---
 
-## 📞 Documentación de Referencia
+## Documentación de Referencia
 
-- 📑 [Índice completo](docs/INDICE.md) - Navegar toda la documentación
-- 🏠 [Backend README](Truekealo/backend/README.md) - Info del servidor
-- 📖 [Arquitectura C4](docs/architecture/README.md) - Cómo ver diagramas
-
----
-
-**Última actualización:** 2 de enero de 2025  
-**Versión:** 1.0.0  
-**Estado:** ✅ Completado y listo para evaluación
-
-*Truekealo - Sistema de Intercambio de Artículos*  
-*Proyecto Integrador Segundo Hito*
-5. Create Pull Request
-
-Guía completa: [GITFLOW_GUIDE.md](docs/GITFLOW_GUIDE.md)
+-  [Backend README](Truekealo/backend/README.md) - Info del servidor
+-  [Arquitectura C4](docs/architecture/README.md) - Cómo ver diagramas
 
 ---
 
 <div align="center">
 
-[📖 Documentación Completa](docs/DOCUMENTACION_TECNICA.md) | [ Arquitectura](docs/architecture/)
+[ Documentación Completa](docs/DOCUMENTACION_TECNICA.md) | [ Arquitectura](docs/architecture/)
 
 Última actualización: 2 de enero de 2025
 

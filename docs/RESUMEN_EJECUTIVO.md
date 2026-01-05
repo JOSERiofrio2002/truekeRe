@@ -1,4 +1,4 @@
-# 📊 Resumen Ejecutivo - Proyecto Truekealo
+#  Resumen Ejecutivo - Proyecto Truekealo
 
 ## 🎯 Proyecto Integrador Académico - Segundo Hito
 
@@ -454,8 +454,3 @@ Se ha completado exitosamente un **sistema profesional de intercambio de artícu
 
 El sistema está **listo para producción** con posibilidades de escalamiento futuro.
 
----
-
-**Proyecto realizado con estándares universitarios de segundo hito**
-
-Última actualización: **2 de enero de 2025**

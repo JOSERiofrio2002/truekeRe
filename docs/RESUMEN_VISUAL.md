@@ -586,19 +586,14 @@ ARCHIVOS
 
 ## 📞 Navegación Rápida
 
-- 🏠 [README Principal](../README.md)
-- 📖 [Índice de Documentación](INDICE.md)
-- 📡 [Documentación Técnica](DOCUMENTACION_TECNICA.md)
-- 🚀 [Guía de Instalación](INSTALACION.md)
-- 🔀 [GitFlow Guide](GITFLOW_GUIDE.md)
-- 🏗️ [Diagramas C4](architecture/)
-- ✅ [Checklist de Verificación](CHECKLIST_VERIFICACION.md)
+-  [README Principal](../README.md)
+-  [Documentación Técnica](DOCUMENTACION_TECNICA.md)
+-  [Guía de Instalación](INSTALACION.md)
+-  [Diagramas C4](architecture/)
+-  [Checklist de Verificación](CHECKLIST_VERIFICACION.md)
 
 ---
 
-**Documento actualizado:** 2 de enero de 2025  
-**Versión:** 1.0  
-**Licencia:** MIT
 
 *Truekealo - Sistema de Intercambio de Artículos*  
 *Proyecto Integrador Segundo Hito - Académico*

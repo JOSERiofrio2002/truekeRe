@@ -1,6 +1,6 @@
-# 📘 Documentación Técnica - Sistema Truekealo
+#  Documentación Técnica - Sistema Truekealo
 
-## 🎯 Introducción
+## Introducción
 
 Truekealo es un sistema de intercambio de artículos entre usuarios, diseñado como proyecto integrador académico de segundo hito. Implementa una arquitectura moderna de frontend-backend integrado con autenticación JWT, base de datos relacional y API REST.
 
@@ -16,7 +16,7 @@ Truekealo es un sistema de intercambio de artículos entre usuarios, diseñado c
 
 ---
 
-## 🏗️ Arquitectura del Sistema
+##  Arquitectura del Sistema
 
 ### Modelo C4 - Niveles de Abstracción
 
@@ -125,7 +125,7 @@ Backend FastAPI
 
 ---
 
-## 💾 Flujo de Datos
+##  Flujo de Datos
 
 ### 1. Autenticación (Login)
 
@@ -193,7 +193,7 @@ Cliente (Frontend)                Backend                   Base de Datos
 
 ---
 
-## 🗄️ Modelo de Datos
+##  Modelo de Datos
 
 ### Tabla: Users
 ```sql
@@ -310,7 +310,7 @@ CREATE TABLE mensajes (
 
 ---
 
-## 🔐 Seguridad
+##  Seguridad
 
 ### Autenticación JWT
 
@@ -379,7 +379,7 @@ headers: {
 
 ---
 
-## 🚀 Instrucciones de Instalación y Ejecución
+##  Instrucciones de Instalación y Ejecución
 
 ### Requisitos Previos
 - Python 3.9+
@@ -510,7 +510,7 @@ fetch('http://localhost:8000/api/v1/articulos/', {
 
 ---
 
-## 📝 Ejemplos de Uso
+##  Ejemplos de Uso
 
 ### Crear Artículo
 
@@ -647,7 +647,7 @@ def test_login_user():
 
 ---
 
-## 📊 Estándares Aplicados
+##  Estándares Aplicados
 
 ### Código
 - ✅ PEP8 para Python

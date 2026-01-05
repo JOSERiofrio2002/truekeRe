@@ -1,4 +1,4 @@
-# 📦 Guía de Instalación - Truekealo
+#  Guía de Instalación - Truekealo
 
 ## ✅ Requisitos Previos
 
@@ -436,24 +436,8 @@ Usuario
 
 1. **Leer documentación:** [DOCUMENTACION_TECNICA.md](DOCUMENTACION_TECNICA.md)
 2. **Entender arquitectura:** [Diagramas C4](docs/architecture/)
-3. **Aprender GitFlow:** [GITFLOW_GUIDE.md](GITFLOW_GUIDE.md)
-4. **Explorar API:** http://localhost:8000/api/docs
-5. **Crear primer artículo:** http://localhost:5500
-
----
-
-## 📞 Soporte
-
-### Si algo no funciona:
-
-1. Verificar esta guía (sección "Solución de Problemas")
-2. Revisar los logs del backend
-3. Verificar la consola del navegador (F12 → Console)
-4. Crear issue en GitHub con:
-   - Error exacto
-   - SO (Windows/Linux/Mac)
-   - Versión de Python
-   - Pasos para reproducir
+3. **Explorar API:** http://localhost:8000/api/docs
+4. **Crear primer artículo:** http://localhost:5500
 
 ---
 
