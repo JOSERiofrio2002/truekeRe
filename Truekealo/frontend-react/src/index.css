@@ -1,3 +1,14 @@
+/* ==================== Variables Globales ==================== */
+:root {
+  --a11y-font-scale: 1;
+}
+
+/* ==================== Escalado Global de Accesibilidad ==================== */
+html {
+  font-size: calc(16px * var(--a11y-font-scale, 1));
+  scroll-behavior: smooth;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,6 +21,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 1rem; /* Se escala con html */
+}
+
+/* Asegurar que todos los elementos de texto respeten el escalado */
+h1, h2, h3, h4, h5, h6,
+p, span, div, a, button, input, textarea, select, label,
+li, td, th {
+  font-size: inherit;
 }
 
 code {

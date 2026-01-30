@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar';
+import AccessibilityPanel from './components/AccessibilityPanel';
 
 // Pages
 import Home from './pages/Home';
@@ -27,6 +28,7 @@ function App() {
       <AuthProvider>
         <div className="app">
           <Navbar />
+          <AccessibilityPanel />
           <main className="main-content">
           <Routes>
               {/* Rutas públicas */}
