@@ -96,6 +96,7 @@ const PropuestasRecibidas = () => {
           <option value="pendiente">Pendientes</option>
           <option value="aceptada">Aceptadas</option>
           <option value="rechazada">Rechazadas</option>
+          <option value="cancelada">Canceladas</option>
         </select>
       </div>
 

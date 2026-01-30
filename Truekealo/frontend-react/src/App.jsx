@@ -8,6 +8,8 @@ import AccessibilityPanel from './components/AccessibilityPanel';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import RecuperarContrasena from './pages/RecuperarContrasena';
+import RestablecerContrasena from './pages/RestablecerContrasena';
 import Dashboard from './pages/Dashboard';
 import Explorar from './pages/Explorar';
 import MisArticulos from './pages/MisArticulos';
@@ -35,6 +37,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/recuperar-contrasena" element={<RecuperarContrasena />} />
+              <Route path="/restablecer-contrasena" element={<RestablecerContrasena />} />
               <Route path="/explorar" element={<Explorar />} />
               <Route path="/articulo/:id" element={<ArticuloDetalle />} />
 

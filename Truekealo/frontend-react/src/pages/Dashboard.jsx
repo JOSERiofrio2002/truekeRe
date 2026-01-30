@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { getActividades } from '../services/actividadesService';
-import { getPropuestasRecibidas, getPropuestasEnviadas, getResumenPropuestas } from '../services/propuestasService';
+import { getPropuestasRecibidas, getPropuestasEnviadas } from '../services/propuestasService';
 import { getUnreadCount } from '../services/mensajesService';
 import { getMisArticulos } from '../services/articulosService';
 import { Link } from 'react-router-dom';
@@ -11,7 +11,6 @@ const Dashboard = () => {
   const [actividades, setActividades] = useState([]);
   const [propuestasRecibidas, setPropuestasRecibidas] = useState([]);
   const [propuestasEnviadas, setPropuestasEnviadas] = useState([]);
-  const [propuestasActivas, setPropuestasActivas] = useState(0);
   const [totalArticulos, setTotalArticulos] = useState(0);
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -22,11 +21,10 @@ const Dashboard = () => {
 
   const loadDashboardData = async () => {
     try {
-      const [actividadesData, recibidas, enviadas, resumen, misArticulos, unread] = await Promise.all([
+      const [actividadesData, recibidas, enviadas, misArticulos, unread] = await Promise.all([
         getActividades(),
         getPropuestasRecibidas(),
         getPropuestasEnviadas(),
-        getResumenPropuestas(),
         getMisArticulos(),
         getUnreadCount(),
       ]);
@@ -34,7 +32,6 @@ const Dashboard = () => {
       setActividades(actividadesData.slice(0, 5)); // Últimas 5 actividades
       setPropuestasRecibidas(recibidas.filter(p => p.estado === 'pendiente'));
       setPropuestasEnviadas(enviadas.filter(p => p.estado === 'pendiente'));
-      setPropuestasActivas(resumen?.pendientes || 0);
       setTotalArticulos(Array.isArray(misArticulos) ? misArticulos.length : 0);
       setUnreadMessages(unread?.unread || 0);
     } catch (error) {
@@ -78,15 +75,6 @@ const Dashboard = () => {
             <p>Propuestas Enviadas</p>
           </div>
           <Link to="/propuestas/enviadas" className="stat-link">Ver →</Link>
-        </div>
-
-        <div className="stats-card">
-          <div className="stat-icon">🤝</div>
-          <div className="stat-content">
-            <h3>{propuestasActivas}</h3>
-            <p>Propuestas Activas</p>
-          </div>
-          <Link to="/propuestas" className="stat-link">Ver →</Link>
         </div>
 
         <div className="stats-card">
