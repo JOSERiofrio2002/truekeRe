@@ -11,18 +11,25 @@ Truekealo es una plataforma web de **intercambio colaborativo de artículos** en
 ### Características Principales
 
 -  **Autenticación Segura** con JWT y contraseñas hasheadas (bcrypt)
--  **Interfaz Responsive** con diseño mobile-first y soporte dark mode
--  **Sistema de Artículos** con CRUD completo, búsqueda y filtros
--  **Propuestas de Intercambio** entre usuarios
--  **Perfiles de Usuario** con información personal y historial
+-  **Interfaz React Moderna** con componentes reutilizables y hooks personalizados
+-  **SPA (Single Page Application)** con navegación fluida sin recargas
+-  **Sistema de Artículos** con CRUD completo, búsqueda en tiempo real y filtros
+-  **Propuestas de Intercambio** entre usuarios con gestión de estados
+-  **Sistema de Mensajería** integrado para comunicación entre usuarios
+-  **Perfiles de Usuario** con información personal y historial de actividades
+-  **Upload de Imágenes** con preview y validación de archivos
 -  **API REST** documentada con Swagger/OpenAPI
 -  **Menú de Accesibilidad Completo** con múltiples herramientas (WCAG 2.1 AA)
--  **Arquitectura Escalable** con separación de capas
+-  **Arquitectura Escalable** con separación de capas y Context API
 
 ### Frontend
-- **HTML5** - Markup semántico
-- **CSS3** - Tailwind CSS + CSS personalizado
-- **JavaScript ES6+** - Vanilla JS sin dependencias externas
+- **React 19** - Biblioteca UI moderna con hooks
+- **React Router v7** - Enrutamiento del lado del cliente
+- **Vite 7** - Build tool ultrarrápido con HMR
+- **Axios** - Cliente HTTP para comunicación con API
+- **SweetAlert2** - Modales y notificaciones elegantes
+- **CSS3** - CSS Modules + estilos personalizados
+- **JavaScript ES6+** - JSX y componentes funcionales
 
 ### Backend
 - **FastAPI** - Framework web moderno y rápido
@@ -32,7 +39,82 @@ Truekealo es una plataforma web de **intercambio colaborativo de artículos** en
 - **Passlib** - Password hashing
 
 ### Base de Datos
-- **MariaDB ** - Base de datos relacional
+- **MariaDB** - Base de datos relacional
+
+## 🏗️ Arquitectura del Frontend React
+
+### Estructura de Componentes
+
+```
+frontend-react/
+├── src/
+│   ├── components/          # Componentes reutilizables
+│   │   ├── Navbar.jsx       # Barra de navegación con menús
+│   │   ├── Footer.jsx       # Pie de página
+│   │   ├── AccessibilityPanel.jsx  # Panel de accesibilidad
+│   │   ├── ProtectedRoute.jsx     # HOC para rutas protegidas
+│   │   ├── FileUpload.jsx         # Componente de carga de archivos
+│   │   ├── SearchBar.jsx          # Barra de búsqueda con debounce
+│   │   ├── NotificationToast.jsx  # Sistema de notificaciones
+│   │   └── UI/                    # Componentes UI base
+│   ├── pages/               # Páginas de la aplicación
+│   │   ├── Home.jsx         # Página principal
+│   │   ├── Login.jsx        # Autenticación
+│   │   ├── Register.jsx     # Registro de usuarios
+│   │   ├── Dashboard.jsx    # Panel de control
+│   │   ├── Explorar.jsx     # Explorar artículos
+│   │   ├── MisArticulos.jsx # Gestión de artículos propios
+│   │   ├── PublicarArticulo.jsx   # Crear artículo
+│   │   ├── EditArticulo.jsx       # Editar artículo
+│   │   ├── ArticuloDetalle.jsx    # Detalle de artículo
+│   │   ├── Mensajes.jsx           # Sistema de mensajería
+│   │   ├── PropuestasRecibidas.jsx # Propuestas recibidas
+│   │   ├── PropuestasEnviadas.jsx  # Propuestas enviadas
+│   │   ├── Perfil.jsx             # Perfil de usuario
+│   │   └── Configuracion.jsx      # Configuración de cuenta
+│   ├── context/             # Context API
+│   │   ├── AuthContext.jsx  # Estado de autenticación global
+│   │   └── DialogContext.jsx # Gestión de diálogos
+│   ├── services/            # Servicios API
+│   │   ├── authService.js   # Autenticación
+│   │   ├── articulosService.js    # Artículos
+│   │   ├── propuestasService.js   # Propuestas
+│   │   ├── mensajesService.js     # Mensajería
+│   │   ├── actividadesService.js  # Actividades
+│   │   └── axiosConfig.js         # Configuración Axios
+│   ├── hooks/               # Custom hooks
+│   │   ├── useAccessibility.js    # Hook de accesibilidad
+│   │   └── useDebounce.js         # Hook de debounce
+│   ├── utils/               # Utilidades
+│   └── styles/              # Estilos globales
+```
+
+### Características Técnicas del Frontend
+
+#### 🎯 Gestión de Estado
+- **Context API**: Estado global de autenticación y diálogos
+- **Local State**: useState y useEffect para estado de componentes
+- **Custom Hooks**: Lógica reutilizable (useAccessibility, useDebounce)
+
+#### 🔐 Autenticación y Seguridad
+- **Token JWT**: Almacenamiento seguro en localStorage
+- **Interceptores Axios**: Inyección automática de tokens
+- **Rutas Protegidas**: HOC ProtectedRoute para control de acceso
+- **Redirección Automática**: Logout y redirect en errores 401
+
+#### 🎨 UI/UX
+- **SPA con React Router**: Navegación sin recargas
+- **Loading States**: Indicadores de carga en todas las operaciones
+- **Error Handling**: Manejo elegante de errores con SweetAlert2
+- **Responsive Design**: Funciona en todos los dispositivos
+- **Accesibilidad**: Panel completo con herramientas WCAG 2.1 AA
+
+#### ⚡ Optimizaciones
+- **Vite HMR**: Hot Module Replacement para desarrollo rápido
+- **Code Splitting**: Carga bajo demanda de componentes
+- **Lazy Loading**: Optimización de imágenes y recursos
+- **Debounce**: En búsquedas para reducir llamadas API
+- **Axios Interceptors**: Manejo centralizado de requests/responses
 
 ##  Documentación Completa
 
@@ -57,8 +139,9 @@ Truekealo es una plataforma web de **intercambio colaborativo de artículos** en
 
 ### Requisitos
 - Python 3.9+
+- Node.js 18+ y npm
 - MariaDB 10.x
-- Navegador moderno
+- Navegador moderno (Chrome, Firefox, Safari, Edge)
 
 ### Instalación (Resumida)
 
@@ -72,11 +155,12 @@ pip install -r requirements.txt
 python -m uvicorn app.main:app --reload
 
 # Frontend (otra terminal)
-cd Truekealo/frontend
-python -m http.server 5500
+cd Truekealo/frontend-react
+npm install
+npm run dev
 ```
 
-**Acceder en:** http://localhost:5500  
+**Acceder en:** http://localhost:5173 (Vite dev server)  
 **Swagger API:** http://localhost:8000/api/docs
 
 **Para instalación completa con BD:** Ver [docs/INSTALACION.md](docs/INSTALACION.md)
@@ -95,6 +179,7 @@ python -m http.server 5500
 
 ##  Endpoints Principales
 
+### API Backend
 ```
 POST   /api/v1/auth/register        # Registro
 POST   /api/v1/auth/login           # Login
@@ -102,6 +187,26 @@ GET    /api/v1/articulos/           # Listar artículos
 POST   /api/v1/articulos/           # Crear artículo
 GET    /api/v1/propuestas/recibidas # Propuestas recibidas
 PATCH  /api/v1/propuestas/{id}      # Aceptar/rechazar
+GET    /api/v1/mensajes/            # Mensajes del usuario
+POST   /api/v1/mensajes/            # Enviar mensaje
+```
+
+### Rutas Frontend (React Router)
+```
+/                    # Home - Página principal
+/login               # Iniciar sesión
+/register            # Registrarse
+/explorar            # Explorar artículos públicos
+/articulo/:id        # Detalle de artículo
+/dashboard           # Panel de control (protegido)
+/mis-articulos       # Mis artículos (protegido)
+/publicar            # Publicar artículo (protegido)
+/editar/:id          # Editar artículo (protegido)
+/mensajes            # Mensajería (protegido)
+/propuestas-recibidas    # Propuestas recibidas (protegido)
+/propuestas-enviadas     # Propuestas enviadas (protegido)
+/perfil              # Perfil de usuario (protegido)
+/configuracion       # Configuración (protegido)
 ```
 
 **Documentación interactiva:** http://localhost:8000/api/docs  
@@ -143,13 +248,13 @@ PATCH  /api/v1/propuestas/{id}      # Aceptar/rechazar
 
 ```
 Backend:         1500+ líneas Python (15 archivos)
-Frontend:        2500+ líneas HTML/CSS/JS
+Frontend React:  3500+ líneas JSX/CSS (40+ componentes)
 Documentación:   8700+ líneas (7 archivos)
 Diagramas C4:    4 niveles (PlantUML)
 Endpoints:       15+ documentados
 Base de Datos:   4 tablas normalizadas
-Dependencias:    27 paquetes Python
-Total:           40+ archivos, 12,000+ líneas
+Dependencias:    27 paquetes Python + 11 paquetes npm
+Total:           60+ archivos, 13,700+ líneas
 ```
 
 Ver [CHECKLIST_VERIFICACION.md](docs/CHECKLIST_VERIFICACION.md) para detalle completo.
@@ -205,10 +310,17 @@ El menú de accesibilidad está disponible en todas las páginas del sitio:
 
 ### 📄 Archivos del Sistema
 
-- `frontend/assets/js/accessibility.js` - Lógica principal (561 líneas)
-- `frontend/assets/css/accessibility-menu.css` - Estilos del menú
-- `frontend/assets/css/accessibility.css` - Estilos de accesibilidad aplicados
-- `frontend/includes/accessibility-menu.html` - HTML del componente
+- **Frontend React**:
+  - `frontend-react/src/components/AccessibilityPanel.jsx` - Componente React del panel
+  - `frontend-react/src/hooks/useAccessibility.js` - Hook personalizado con toda la lógica
+  - `frontend-react/src/hooks/useAccessibility.test.js` - Tests unitarios
+  - Estilos integrados en el componente con CSS Modules
+  
+- **Frontend Legacy** (HTML/CSS/JS):
+  - `frontend/assets/js/accessibility.js` - Lógica principal (561 líneas)
+  - `frontend/assets/css/accessibility-menu.css` - Estilos del menú
+  - `frontend/assets/css/accessibility.css` - Estilos de accesibilidad aplicados
+  - `frontend/includes/accessibility-menu.html` - HTML del componente
 
 ---
 
@@ -222,8 +334,9 @@ source venv/bin/activate
 python -m uvicorn app.main:app --reload
 
 # Terminal 2: Frontend  
-cd Truekealo/frontend
-python -m http.server 5500
+cd Truekealo/frontend-react
+npm install
+npm run dev
 ```
 
 **Ver API docs:**
